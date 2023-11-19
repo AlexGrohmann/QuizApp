@@ -23,6 +23,8 @@ const QuizPage = ({ navigation }) => {
   const [correctOption, setCorrectOption] = useState(null);
   const [score, setScore] = useState(0);
 
+  const NUMBER_OF_QUESTIONS = 5;
+
   const restartQuiz = () => {
     setCurrentQuestionIndex(0);
     setScore(0);
@@ -43,8 +45,12 @@ const QuizPage = ({ navigation }) => {
     }
   };
   const handleNext = (navigation) => {
-    if (currentQuestionIndex == allQuestions.length - 1) {
-      navigation.navigate("Result", { score: score, restartQuiz: restartQuiz });
+    if (currentQuestionIndex == NUMBER_OF_QUESTIONS) {
+      navigation.navigate("Result", {
+        score: score,
+        restartQuiz: restartQuiz,
+        numberOfQuestions: NUMBER_OF_QUESTIONS,
+      });
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setCurrentOptionSelected(null);

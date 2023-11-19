@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 const Result = ({ navigation, route }) => {
-  const { score } = route.params;
+  const { score, numberOfQuestions } = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
@@ -9,7 +9,7 @@ const Result = ({ navigation, route }) => {
 
         <View style={styles.textWrapper}>
           <Text style={styles.score}>{score}</Text>
-          <Text style={styles.score}> / 3</Text>
+          <Text style={styles.score}> / {numberOfQuestions}</Text>
         </View>
         {/* Retry Quiz button */}
         <TouchableOpacity
