@@ -13,6 +13,7 @@ import Questions from "./Questions";
 import { Colors } from "./Welcome";
 
 const QuizPage = ({ navigation }) => {
+  // version 1
   const allQuestions = data;
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
