@@ -16,7 +16,7 @@ const QuizPage = ({ navigation }) => {
   // version 1
   const allQuestions = data;
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(Math.floor(Math.random() * allQuestions.length));
   const [progress, setProgress] = useState(new Animated.Value(1));
   const [fadeAnim, setFadeAnim] = useState(new Animated.Value(1));
 
@@ -28,7 +28,7 @@ const QuizPage = ({ navigation }) => {
   const NUMBER_OF_QUESTIONS = 5;
 
   const restartQuiz = () => {
-    setCurrentQuestionIndex(0);
+    setCurrentQuestionIndex(Math.floor(Math.random() * allQuestions.length));
     setScore(0);
     setCurrentOptionSelected(null);
     setCorrectOption(null);
@@ -54,7 +54,7 @@ const QuizPage = ({ navigation }) => {
         numberOfQuestions: NUMBER_OF_QUESTIONS,
       });
     } else {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setCurrentQuestionIndex(Math.floor(Math.random() * allQuestions.length));
       setCurrentOptionSelected(null);
       setCorrectOption(null);
       setIsOptionsDisabled(false);
@@ -167,7 +167,7 @@ const QuizPage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  scrollView: { backgroundColor: Colors.black },
+  scrollView: { backgroundColor: Colors.black, overflow: "scroll" },
   container: {
     flex: 1,
     paddingVertical: 20,
