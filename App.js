@@ -1,5 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Welcome from "./app/screens/Welcome";
@@ -22,7 +20,7 @@ export default function App() {
           options={{
             title: "Questions",
             headerStyle: {
-              backgroundColor: "#fac782",
+              backgroundColor: "black",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {

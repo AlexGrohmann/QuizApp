@@ -1,11 +1,12 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Colors } from "./Welcome";
 
 const Result = ({ navigation, route }) => {
   const { score, numberOfQuestions } = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
-        <Text style={{ fontSize: 50 }}>Your Score</Text>
+        <Text style={{ fontSize: 50, color: "white" }}>Your Score</Text>
 
         <View style={styles.textWrapper}>
           <Text style={styles.score}>{score}</Text>
@@ -28,12 +29,11 @@ const Result = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#38588b",
+    backgroundColor: Colors.black,
     alignItems: "center",
     justifyContent: "center",
   },
   subContainer: {
-    backgroundColor: "#38588b",
     width: "90%",
     borderRadius: 20,
     padding: 20,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   btnReset: {
-    backgroundColor: "#333",
+    backgroundColor: Colors.pink,
     paddingHorizontal: 5,
     paddingVertical: 15,
     width: "50%",

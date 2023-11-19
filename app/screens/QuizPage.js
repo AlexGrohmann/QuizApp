@@ -10,6 +10,7 @@ import {
 import data from "../../QuizData";
 import ProgressBar from "./ProgressBar";
 import Questions from "./Questions";
+import { Colors } from "./Welcome";
 
 const QuizPage = ({ navigation }) => {
   const allQuestions = data;
@@ -45,7 +46,7 @@ const QuizPage = ({ navigation }) => {
     }
   };
   const handleNext = (navigation) => {
-    if (currentQuestionIndex == NUMBER_OF_QUESTIONS) {
+    if (currentQuestionIndex == NUMBER_OF_QUESTIONS - 1) {
       navigation.navigate("Result", {
         score: score,
         restartQuiz: restartQuiz,
@@ -80,7 +81,7 @@ const QuizPage = ({ navigation }) => {
 
   const renderOptions = (navigation) => {
     return (
-      <View style={{ marginTop: 100 }}>
+      <View style={{ marginTop: 50 }}>
         {allQuestions[currentQuestionIndex]?.options.map((option, index) => (
           <Animated.View
             key={index}
@@ -102,20 +103,20 @@ const QuizPage = ({ navigation }) => {
               style={[
                 { ...styles.optionsText },
                 {
-                  backgroundColor: isOptionsDisabled
+                  shadowColor: isOptionsDisabled
                     ? option == correctOption
                       ? "#7be25b"
                       : option == currentOptionSelected
                       ? "#f0222b" //red
-                      : "#cfcdcc" //gray
-                    : "#fac782",
+                      : Colors.blue 
+                    : Colors.blue,
                 },
               ]}
             >
               <Text
                 style={{
                   fontSize: 16,
-                  color: "black",
+                  color: "white",
                   textAlign: "center",
                 }}
               >
@@ -131,11 +132,12 @@ const QuizPage = ({ navigation }) => {
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
         <View style={styles.subContainer}>
-          <ProgressBar progress={progress} />
+          <ProgressBar progress={progress} numberOfQuestions={NUMBER_OF_QUESTIONS} />
 
           <Questions
             index={currentQuestionIndex}
             question={allQuestions[currentQuestionIndex]?.question}
+            numberOfQuestions={NUMBER_OF_QUESTIONS}
           />
         </View>
         {renderOptions(navigation)}
@@ -145,13 +147,14 @@ const QuizPage = ({ navigation }) => {
           style={[
             { ...styles.btnNext },
             {
-              backgroundColor: !currentOptionSelected ? "#cfcdcc" : "#ffffff",
+              backgroundColor: !currentOptionSelected ? Colors.black : Colors.pink,
+              
             },
           ]}
           disabled={!currentOptionSelected}
           onPress={() => handleNext(navigation)}
         >
-          <Text style={styles.btnNextText}>NEXT</Text>
+          <Text style={styles.btnNextText}>&rarr;</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -159,7 +162,7 @@ const QuizPage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  scrollView: { backgroundColor: "#38588b" },
+  scrollView: { backgroundColor: Colors.black },
   container: {
     flex: 1,
     paddingVertical: 20,
@@ -172,11 +175,11 @@ const styles = StyleSheet.create({
     padding: 40,
     borderTopRightRadius: 40,
     borderRadius: 10,
-    backgroundColor: "white",
     alignItems: "center",
-    shadowColor: "#171717",
-    shadowOffset: { width: -6, height: 6 },
-    shadowOpacity: 0.2,
+    backgroundColor: Colors.black,
+    shadowColor: Colors.lila,
+    shadowOffset: { width: -1, height: 1 },
+    shadowOpacity: 0.8,
     shadowRadius: 3,
   },
   optionsText: {
@@ -186,20 +189,22 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 30,
     marginVertical: 10,
-    shadowColor: "#171717",
-    shadowOffset: { width: -3, height: 3 },
-    shadowOpacity: 0.2,
+    backgroundColor: Colors.black,
+    shadowColor: Colors.lila,
+    shadowOffset: { width: -1, height: 1 },
+    shadowOpacity: 0.8,
     shadowRadius: 3,
+    minHeight: 70,
   },
   btnNext: {
     borderRadius: 10,
 
     paddingVertical: 13,
     paddingHorizontal: 20,
-    backgroundColor: "#ffffff",
+    backgroundColor: Colors.pink,
   },
   btnNextText: {
-    color: "#333",
+    color: 'white',
     fontSize: 17,
     letterSpacing: 1.1,
   },

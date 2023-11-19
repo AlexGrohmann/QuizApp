@@ -1,8 +1,9 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import data from "../../QuizData";
+import { Colors } from "./Welcome";
 
-const Questions = ({ index, question }) => {
+const Questions = ({ index, question, numberOfQuestions }) => {
   return (
     <View style={{}}>
       {/* Question Counter */}
@@ -13,19 +14,19 @@ const Questions = ({ index, question }) => {
         }}
       >
         <Text
-          style={{ color: "#333", fontSize: 15, opacity: 0.6, marginRight: 2 }}
+          style={{ color: "white", fontSize: 15, opacity: 0.6, marginRight: 2 }}
         >
           {index + 1}
         </Text>
-        <Text style={{ color: "#333", fontSize: 13, opacity: 0.6 }}>
-          / {data.length}
+        <Text style={{ color: "white", fontSize: 13, opacity: 0.6 }}>
+          / {numberOfQuestions}
         </Text>
       </View>
 
       {/* Question */}
       <Text
         style={{
-          color: "#333",
+          color: "white",
           fontSize: 18,
           textAlign: "center",
         }}
@@ -36,6 +37,6 @@ const Questions = ({ index, question }) => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create();
 
 export default Questions;

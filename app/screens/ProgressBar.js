@@ -1,12 +1,11 @@
 import React from "react";
 import { View, Animated, StyleSheet } from "react-native";
-import data from "../../QuizData";
+import { Colors } from "./Welcome";
 
-const ProgressBar = ({ progress }) => {
-  const allQuestions = data;
+const ProgressBar = ({ progress, numberOfQuestions }) => {
 
   const progressAnim = progress.interpolate({
-    inputRange: [0, allQuestions.length],
+    inputRange: [0, numberOfQuestions],
     outputRange: ["0%", "100%"],
   });
   return (
@@ -16,7 +15,7 @@ const ProgressBar = ({ progress }) => {
           {
             height: 5,
             borderRadius: 5,
-            backgroundColor: "#EDA276" + "90",
+            backgroundColor: Colors.blue + "90",
           },
           {
             width: progressAnim,
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
     width: "80%",
     height: 5,
     borderRadius: 5,
-    backgroundColor: "#00000020",
+    backgroundColor: Colors.lila,
     marginBottom: 10,
   },
 });
