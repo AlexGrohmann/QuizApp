@@ -7,7 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import data from "../../QuizData";
+import data from "../../data";
 import ProgressBar from "./ProgressBar";
 import Questions from "./Questions";
 import { Colors } from "./Welcome";
@@ -108,7 +108,7 @@ const QuizPage = ({ navigation }) => {
                       ? "#7be25b"
                       : option == currentOptionSelected
                       ? "#f0222b" //red
-                      : Colors.blue 
+                      : Colors.blue
                     : Colors.blue,
                 },
               ]}
@@ -132,7 +132,10 @@ const QuizPage = ({ navigation }) => {
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
         <View style={styles.subContainer}>
-          <ProgressBar progress={progress} numberOfQuestions={NUMBER_OF_QUESTIONS} />
+          <ProgressBar
+            progress={progress}
+            numberOfQuestions={NUMBER_OF_QUESTIONS}
+          />
 
           <Questions
             index={currentQuestionIndex}
@@ -147,8 +150,9 @@ const QuizPage = ({ navigation }) => {
           style={[
             { ...styles.btnNext },
             {
-              backgroundColor: !currentOptionSelected ? Colors.black : Colors.pink,
-              
+              backgroundColor: !currentOptionSelected
+                ? Colors.black
+                : Colors.pink,
             },
           ]}
           disabled={!currentOptionSelected}
@@ -204,7 +208,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.pink,
   },
   btnNextText: {
-    color: 'white',
+    color: "white",
     fontSize: 17,
     letterSpacing: 1.1,
   },

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
-import data from "../../QuizData";
+import data from "../../data";
 import { Colors } from "./Welcome";
 
 const Questions = ({ index, question, numberOfQuestions }) => {
