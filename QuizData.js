@@ -31,52 +31,28 @@ export default data = [
   },
   {
     question: "1",
-    options: [
-      "option 1",
-      "option 2",
-      "option 3",
-      "option 4",
-    ],
+    options: ["option 1", "option 2", "option 3", "option 4"],
     correct_option: "option 2",
   },
   {
     question: "2",
-    options: [
-      "option 1",
-      "option 2",
-      "option 3",
-      "option 4",
-    ],
+    options: ["option 1", "option 2", "option 3", "option 4"],
     correct_option: "option 2",
   },
   {
     question: "3",
-    options: [
-      "option 1",
-      "option 2",
-      "option 3",
-      "option 4",
-    ],
+    options: ["option 1", "option 2", "option 3", "option 4"],
     correct_option: "option 2",
   },
   {
     question: "4",
-    options: [
-      "option 1",
-      "option 2",
-      "option 3",
-      "option 4",
-    ],
+    options: ["option 1", "option 2", "option 3", "option 4"],
     correct_option: "option 2",
   },
   {
     question: "5",
-    options: [
-      "option 1",
-      "option 2",
-      "option 3",
-      "option 4",
-    ],
+    options: ["option 1", "option 2", "option 3", "option 4"],
     correct_option: "option 2",
   },
 ];
+meow;
