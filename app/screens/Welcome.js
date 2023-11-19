@@ -8,15 +8,28 @@ import {
   Animated,
 } from "react-native";
 
+// STYLING CONSTANTS
+
+// blue: 6ca6e0
+// pink-blue:
+
+export const Colors = {
+  blue: "#6ca6e0",
+  bluePink: "#818ed9",
+  lila: "#9676d2",
+  pink: "#ab5fcb",
+  black: "#000000",
+};
+
 const Welcome = ({ navigation }) => {
   const [fadeAnim, setFadeAnim] = useState(new Animated.Value(1));
   const [progress, setProgress] = useState(new Animated.Value(0));
   const startQuiz = () => {
-    // Animated.timing(fadeAnim,{
-    //     toValue: 1,
-    //     duration: 1000,
-    //     useNativeDriver: false
-    // }).start();
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: false,
+    }).start();
     Animated.sequence([
       Animated.timing(fadeAnim, {
         toValue: 0,
@@ -38,10 +51,10 @@ const Welcome = ({ navigation }) => {
   };
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require("../assets/icon.png")} />
-      <View style={styles.subContainer}>
+      <Image style={styles.image} source={require("../assets/logo.png")} />
+      {/* <View style={styles.subContainer}>
         <Text style={styles.text}>Ready For your Written Test?</Text>
-      </View>
+      </View> */}
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Quiz");
@@ -58,7 +71,7 @@ const Welcome = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#38588b",
+    backgroundColor: Colors.black,
     alignItem: "center",
     justifyContent: "center",
   },
@@ -80,8 +93,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   btn: {
-    // backgroundColor: "#d5bf96",
-    backgroundColor: "#fac782",
+    backgroundColor: Colors.bluePink,
     paddingHorizontal: 5,
     paddingVertical: 15,
     // width: "50%",
