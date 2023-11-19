@@ -52,9 +52,6 @@ const Welcome = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={require("../assets/logo.png")} />
-      {/* <View style={styles.subContainer}>
-        <Text style={styles.text}>Ready For your Written Test?</Text>
-      </View> */}
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Quiz");
@@ -62,7 +59,7 @@ const Welcome = ({ navigation }) => {
         }}
         style={styles.btn}
       >
-        <Text style={styles.btnText}>Let's Begin</Text>
+        <Text style={styles.btnText}>&rarr;</Text>
       </TouchableOpacity>
     </View>
   );
@@ -80,26 +77,19 @@ const styles = StyleSheet.create({
     height: 350,
     resizeMode: "contain",
   },
-  subContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItem: "center",
-    marginVertical: 20,
-    marginHorizontal: 20,
-  },
   text: {
     fontSize: 25,
     fontWeight: "bold",
     color: "#ffffff",
   },
   btn: {
-    backgroundColor: Colors.bluePink,
+    backgroundColor: Colors.lila,
     paddingHorizontal: 5,
     paddingVertical: 15,
-    // width: "50%",
+    width: "50%",
     position: "relative",
     borderRadius: 15,
-    marginHorizontal: 20,
+    marginHorizontal: "25%",
     alignItems: "center",
   },
   btnText: {
