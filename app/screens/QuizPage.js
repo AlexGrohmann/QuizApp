@@ -13,7 +13,7 @@ import Questions from "./Questions";
 import { Colors } from "./Welcome";
 
 const QuizPage = ({ navigation }) => {
-  // version 2
+  // version 3
   const allQuestions = data;
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(
@@ -27,7 +27,7 @@ const QuizPage = ({ navigation }) => {
   const [correctOption, setCorrectOption] = useState(null);
   const [score, setScore] = useState(0);
 
-  const NUMBER_OF_QUESTIONS = 2;
+  const NUMBER_OF_QUESTIONS = 5;
 
   const restartQuiz = () => {
     setCurrentQuestionIndex(Math.floor(Math.random() * allQuestions.length));
@@ -169,9 +169,9 @@ const QuizPage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  scrollView: { 
-    backgroundColor: Colors.black, 
-    overflow: "scroll", 
+  scrollView: {
+    backgroundColor: Colors.black,
+    overflow: "scroll",
     paddingHorizontal: 5,
     paddingBottom: 50,
   },
