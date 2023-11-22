@@ -13,10 +13,12 @@ import Questions from "./Questions";
 import { Colors } from "./Welcome";
 
 const QuizPage = ({ navigation }) => {
-  // version 1
+  // version 2
   const allQuestions = data;
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(Math.floor(Math.random() * allQuestions.length));
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(
+    Math.floor(Math.random() * allQuestions.length)
+  );
   const [progress, setProgress] = useState(new Animated.Value(1));
   const [fadeAnim, setFadeAnim] = useState(new Animated.Value(1));
 
@@ -25,7 +27,7 @@ const QuizPage = ({ navigation }) => {
   const [correctOption, setCorrectOption] = useState(null);
   const [score, setScore] = useState(0);
 
-  const NUMBER_OF_QUESTIONS = 5;
+  const NUMBER_OF_QUESTIONS = 2;
 
   const restartQuiz = () => {
     setCurrentQuestionIndex(Math.floor(Math.random() * allQuestions.length));
@@ -146,7 +148,7 @@ const QuizPage = ({ navigation }) => {
         </View>
         {renderOptions(navigation)}
       </View>
-      <View style={{ position: "absolute", bottom: -75, right: 20 }}>
+      <View style={styles.btnContainer}>
         <TouchableOpacity
           style={[
             { ...styles.btnNext },
@@ -167,7 +169,12 @@ const QuizPage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  scrollView: { backgroundColor: Colors.black, overflow: "scroll" },
+  scrollView: { 
+    backgroundColor: Colors.black, 
+    overflow: "scroll", 
+    paddingHorizontal: 5,
+    paddingBottom: 50,
+  },
   container: {
     flex: 1,
     paddingVertical: 20,
@@ -200,6 +207,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 3,
     minHeight: 70,
+  },
+  btnContainer: {
+    display: "flex",
+    alignItems: "flex-end",
   },
   btnNext: {
     borderRadius: 10,
