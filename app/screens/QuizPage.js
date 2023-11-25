@@ -6,6 +6,7 @@ import {
   Animated,
   StyleSheet,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
 import data from "../../data";
 import ProgressBar from "./ProgressBar";
@@ -21,11 +22,12 @@ const QuizPage = ({ navigation }) => {
   );
   const [progress, setProgress] = useState(new Animated.Value(1));
   const [fadeAnim, setFadeAnim] = useState(new Animated.Value(1));
-
   const [isOptionsDisabled, setIsOptionsDisabled] = useState(false);
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
   const [correctOption, setCorrectOption] = useState(null);
   const [score, setScore] = useState(0);
+  const [input, setInput] = useState("");
+  const [currentNumberOfQuestion, setCurrentNumberOfQuestion] = useState(0);
 
   const NUMBER_OF_QUESTIONS = 5;
 
@@ -35,6 +37,7 @@ const QuizPage = ({ navigation }) => {
     setCurrentOptionSelected(null);
     setCorrectOption(null);
     setIsOptionsDisabled(false);
+    setCurrentNumberOfQuestion(0);
   };
   const validateAnswer = (selectedOption, navigation) => {
     if (isOptionsDisabled == false) {
@@ -47,9 +50,10 @@ const QuizPage = ({ navigation }) => {
         setScore(score + 1);
       }
     }
+    setCurrentNumberOfQuestion(currentNumberOfQuestion + 1);
   };
   const handleNext = (navigation) => {
-    if (currentQuestionIndex == NUMBER_OF_QUESTIONS - 1) {
+    if (currentNumberOfQuestion == NUMBER_OF_QUESTIONS) {
       navigation.navigate("Result", {
         score: score,
         restartQuiz: restartQuiz,
@@ -63,7 +67,7 @@ const QuizPage = ({ navigation }) => {
     }
     Animated.parallel([
       Animated.timing(progress, {
-        toValue: currentQuestionIndex + 2,
+        toValue: currentNumberOfQuestion + 2,
         duration: 2000,
         useNativeDriver: false,
       }),
@@ -131,22 +135,86 @@ const QuizPage = ({ navigation }) => {
       </View>
     );
   };
+  const renderInput = (navigation) => {
+    return (
+      <View style={{ marginTop: 50 }}>
+        <Animated.View
+          style={{
+            opacity: fadeAnim,
+            transform: [
+              {
+                translateY: fadeAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [(150 / 4) * (0 + 10), 0], // 0 : 150, 0.5 : 75, 1 : 0
+                }),
+              },
+            ],
+          }}
+        >
+          <TextInput
+            style={[
+              { ...styles.optionsText },
+              {
+                shadowColor: isOptionsDisabled
+                  ? input == correctOption
+                    ? "#7be25b"
+                    : input == currentOptionSelected
+                    ? "#f0222b" //red
+                    : Colors.blue
+                  : Colors.blue,
+              },
+            ]}
+            placeholder="enter answer"
+            onChangeText={setInput}
+            value={input}
+          />
+          <TouchableOpacity
+            onPress={() => validateAnswer(input, navigation)}
+            style={[
+              { ...styles.optionsText },
+              {
+                shadowColor: isOptionsDisabled
+                  ? input == correctOption
+                    ? "#7be25b"
+                    : input == currentOptionSelected
+                    ? "#f0222b" //red
+                    : Colors.blue
+                  : Colors.blue,
+              },
+            ]}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              {"check"}
+            </Text>
+          </TouchableOpacity>
+        </Animated.View>
+      </View>
+    );
+  };
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
         <View style={styles.subContainer}>
           <ProgressBar
             progress={progress}
-            numberOfQuestions={NUMBER_OF_QUESTIONS}
+            numberOfQuestions={currentNumberOfQuestion}
           />
 
           <Questions
-            index={currentQuestionIndex}
+            index={currentNumberOfQuestion}
             question={allQuestions[currentQuestionIndex]?.question}
             numberOfQuestions={NUMBER_OF_QUESTIONS}
           />
         </View>
-        {renderOptions(navigation)}
+        {allQuestions[currentQuestionIndex].options.length > 0
+          ? renderOptions(navigation)
+          : renderInput(navigation)}
       </View>
       <View style={styles.btnContainer}>
         <TouchableOpacity
@@ -207,6 +275,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 3,
     minHeight: 70,
+    color: "white",
   },
   btnContainer: {
     display: "flex",
