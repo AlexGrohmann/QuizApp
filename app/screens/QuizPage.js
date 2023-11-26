@@ -50,7 +50,11 @@ const QuizPage = ({ navigation }) => {
         setScore(score + 1);
       }
     }
-    setCurrentNumberOfQuestion(currentNumberOfQuestion + 1);
+    setCurrentNumberOfQuestion(
+      currentNumberOfQuestion < NUMBER_OF_QUESTIONS
+        ? currentNumberOfQuestion + 1
+        : currentNumberOfQuestion
+    );
   };
   const handleNext = (navigation) => {
     if (currentNumberOfQuestion == NUMBER_OF_QUESTIONS) {
@@ -67,7 +71,7 @@ const QuizPage = ({ navigation }) => {
     }
     Animated.parallel([
       Animated.timing(progress, {
-        toValue: currentNumberOfQuestion + 2,
+        toValue: currentNumberOfQuestion + 1,
         duration: 2000,
         useNativeDriver: false,
       }),
@@ -203,7 +207,7 @@ const QuizPage = ({ navigation }) => {
         <View style={styles.subContainer}>
           <ProgressBar
             progress={progress}
-            numberOfQuestions={currentNumberOfQuestion}
+            numberOfQuestions={NUMBER_OF_QUESTIONS}
           />
 
           <Questions
