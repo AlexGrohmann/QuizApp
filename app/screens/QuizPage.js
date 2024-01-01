@@ -190,11 +190,11 @@ const QuizPage = ({ navigation }) => {
             <Text
               style={{
                 fontSize: 16,
-                color: "white",
+                color: correctOption ? "green" : "white",
                 textAlign: "center",
               }}
             >
-              {"check"}
+              {correctOption || "check"}
             </Text>
           </TouchableOpacity>
         </Animated.View>
