@@ -1,3 +1,4 @@
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Welcome from "./app/screens/Welcome";
@@ -5,6 +6,7 @@ import QuizPage from "./app/screens/QuizPage";
 import Result from "./app/screens/Result";
 
 const Stack = createNativeStackNavigator();
+
 export default function App() {
   return (
     <NavigationContainer>

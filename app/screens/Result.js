@@ -1,29 +1,36 @@
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import PropTypes from "prop-types"; // Add PropTypes import
 import { Colors } from "./Welcome";
 
 const Result = ({ navigation, route }) => {
   const { score, numberOfQuestions } = route.params;
+
+  const handleRetry = () => {
+    navigation.navigate("Welcome");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
-        <Text style={{ fontSize: 50, color: "white" }}>Your Score</Text>
+        <Text style={styles.title}>Your Score</Text>
 
-        <View style={styles.textWrapper}>
-          <Text style={styles.score}>{score}</Text>
-          <Text style={styles.score}> / {numberOfQuestions}</Text>
+        <View style={styles.scoreWrapper}>
+          <Text style={styles.scoreText}>{score}</Text>
+          <Text style={styles.scoreText}> / {numberOfQuestions}</Text>
         </View>
-        {/* Retry Quiz button */}
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Welcome");
-          }}
-          style={styles.btnReset}
-        >
+
+        <TouchableOpacity onPress={handleRetry} style={styles.btnReset}>
           <Text style={styles.btnText}>Retry</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
+};
+
+Result.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -39,13 +46,18 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: "center",
   },
-  textWrapper: {
+  title: {
+    fontSize: 50,
+    color: "white",
+    marginBottom: 30,
+  },
+  scoreWrapper: {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    marginVertical: 30,
+    marginBottom: 30,
   },
-  score: {
+  scoreText: {
     fontSize: 100,
     color: "#ffffff",
     fontWeight: "bold",
@@ -64,4 +76,5 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 });
+
 export default Result;

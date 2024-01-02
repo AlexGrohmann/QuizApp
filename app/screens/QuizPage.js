@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import {
   View,
   Text,
@@ -40,7 +41,7 @@ const QuizPage = ({ navigation }) => {
     setCurrentNumberOfQuestion(0);
   };
   const validateAnswer = (selectedOption, navigation) => {
-    if (isOptionsDisabled == false) {
+    if (!isOptionsDisabled) {
       let correct_option = allQuestions[currentQuestionIndex]["correct_option"];
 
       setCurrentOptionSelected(selectedOption);
@@ -95,7 +96,7 @@ const QuizPage = ({ navigation }) => {
       <View style={{ marginTop: 50 }}>
         {allQuestions[currentQuestionIndex]?.options.map((option, index) => (
           <Animated.View
-            key={index}
+            key={option}
             style={{
               opacity: fadeAnim,
               transform: [
@@ -110,7 +111,6 @@ const QuizPage = ({ navigation }) => {
           >
             <TouchableOpacity
               onPress={() => validateAnswer(option, navigation)}
-              key={index}
               style={[
                 { ...styles.optionsText },
                 {
@@ -140,6 +140,13 @@ const QuizPage = ({ navigation }) => {
     );
   };
   const renderInput = (navigation) => {
+    const shadowColor = isOptionsDisabled
+      ? input == correctOption
+        ? "#7be25b"
+        : input == currentOptionSelected
+        ? "#f0222b" //red
+        : Colors.blue
+      : Colors.blue;
     return (
       <View style={{ marginTop: 50 }}>
         <Animated.View
@@ -172,20 +179,10 @@ const QuizPage = ({ navigation }) => {
             onChangeText={setInput}
             value={input}
           />
+
           <TouchableOpacity
             onPress={() => validateAnswer(input, navigation)}
-            style={[
-              { ...styles.optionsText },
-              {
-                shadowColor: isOptionsDisabled
-                  ? input == correctOption
-                    ? "#7be25b"
-                    : input == currentOptionSelected
-                    ? "#f0222b" //red
-                    : Colors.blue
-                  : Colors.blue,
-              },
-            ]}
+            style={[{ ...styles.optionsText }, { shadowColor }]}
           >
             <Text
               style={{
@@ -238,6 +235,10 @@ const QuizPage = ({ navigation }) => {
       </View>
     </ScrollView>
   );
+};
+
+QuizPage.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({

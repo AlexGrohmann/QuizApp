@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   View,
   Text,
@@ -7,11 +8,6 @@ import {
   StyleSheet,
   Animated,
 } from "react-native";
-
-// STYLING CONSTANTS
-
-// blue: 6ca6e0
-// pink-blue:
 
 export const Colors = {
   blue: "#6ca6e0",
@@ -24,12 +20,12 @@ export const Colors = {
 const Welcome = ({ navigation }) => {
   const [fadeAnim, setFadeAnim] = useState(new Animated.Value(1));
   const [progress, setProgress] = useState(new Animated.Value(0));
+
+  useEffect(() => {
+    startQuiz();
+  }, []);
+
   const startQuiz = () => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: false,
-    }).start();
     Animated.sequence([
       Animated.timing(fadeAnim, {
         toValue: 0,
@@ -44,11 +40,12 @@ const Welcome = ({ navigation }) => {
     ]).start();
 
     Animated.timing(progress, {
-      toValue: 0 + 1,
+      toValue: 1,
       duration: 2000,
       useNativeDriver: false,
     }).start();
   };
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={require("../assets/logo.png")} />
@@ -65,11 +62,15 @@ const Welcome = ({ navigation }) => {
   );
 };
 
+Welcome.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.black,
-    alignItem: "center",
+    alignItems: "center",
     justifyContent: "center",
   },
   image: {
@@ -99,4 +100,5 @@ const styles = StyleSheet.create({
     letterSpacing: 1.1,
   },
 });
+
 export default Welcome;
