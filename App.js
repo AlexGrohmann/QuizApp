@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Welcome from "./app/screens/Welcome";
 import QuizPage from "./app/screens/QuizPage";
 import Result from "./app/screens/Result";
+import Options from "./app/screens/Options";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,11 @@ export default function App() {
         <Stack.Screen
           name="Welcome"
           component={Welcome}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Options"
+          component={Options}
           options={{ headerShown: false }}
         />
         <Stack.Screen

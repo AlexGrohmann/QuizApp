@@ -51,7 +51,7 @@ const Welcome = ({ navigation }) => {
       <Image style={styles.image} source={require("../assets/logo.png")} />
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("Quiz");
+          navigation.navigate("Options");
           startQuiz();
         }}
         style={styles.btn}

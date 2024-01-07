@@ -9,17 +9,31 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import data from "../../data";
+import { securityPlusQuestions } from "../../data";
+import { portQuestions } from "../../data";
 import ProgressBar from "./ProgressBar";
 import Questions from "./Questions";
 import { Colors } from "./Welcome";
 
-const QuizPage = ({ navigation }) => {
+const QuizPage = ({ route, navigation }) => {
   // version 13
-  const allQuestions = data;
-
+  let questions = [];
+  switch (route.params.questionsOptions) {
+    case "all":
+      questions = [...securityPlusQuestions, ...portQuestions];
+      break;
+    case "ports":
+      questions = portQuestions;
+      break;
+    case "security+":
+      questions = securityPlusQuestions;
+      break;
+    default:
+      questions = securityPlusQuestions;
+      break;
+  }
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(
-    Math.floor(Math.random() * allQuestions.length)
+    Math.floor(Math.random() * questions.length)
   );
   const [progress, setProgress] = useState(new Animated.Value(1));
   const [fadeAnim, setFadeAnim] = useState(new Animated.Value(1));
@@ -30,10 +44,13 @@ const QuizPage = ({ navigation }) => {
   const [input, setInput] = useState("");
   const [currentNumberOfQuestion, setCurrentNumberOfQuestion] = useState(0);
 
-  const NUMBER_OF_QUESTIONS = 5;
+  const NUMBER_OF_QUESTIONS =
+    route.params.numberOfQuestions > questions.length
+      ? questions.length
+      : route.params.numberOfQuestions;
 
   const restartQuiz = () => {
-    setCurrentQuestionIndex(Math.floor(Math.random() * allQuestions.length));
+    setCurrentQuestionIndex(Math.floor(Math.random() * questions.length));
     setScore(0);
     setCurrentOptionSelected(null);
     setCorrectOption(null);
@@ -42,7 +59,7 @@ const QuizPage = ({ navigation }) => {
   };
   const validateAnswer = (selectedOption, navigation) => {
     if (!isOptionsDisabled) {
-      let correct_option = allQuestions[currentQuestionIndex]["correct_option"];
+      let correct_option = questions[currentQuestionIndex]["correct_option"];
 
       setCurrentOptionSelected(selectedOption);
       setCorrectOption(correct_option);
@@ -65,7 +82,7 @@ const QuizPage = ({ navigation }) => {
         numberOfQuestions: NUMBER_OF_QUESTIONS,
       });
     } else {
-      setCurrentQuestionIndex(Math.floor(Math.random() * allQuestions.length));
+      setCurrentQuestionIndex(Math.floor(Math.random() * questions.length));
       setCurrentOptionSelected(null);
       setCorrectOption(null);
       setIsOptionsDisabled(false);
@@ -94,7 +111,7 @@ const QuizPage = ({ navigation }) => {
   const renderOptions = (navigation) => {
     return (
       <View style={{ marginTop: 50 }}>
-        {allQuestions[currentQuestionIndex]?.options.map((option, index) => (
+        {questions[currentQuestionIndex]?.options.map((option, index) => (
           <Animated.View
             key={option}
             style={{
@@ -209,11 +226,11 @@ const QuizPage = ({ navigation }) => {
 
           <Questions
             index={currentNumberOfQuestion}
-            question={allQuestions[currentQuestionIndex]?.question}
+            question={questions[currentQuestionIndex]?.question}
             numberOfQuestions={NUMBER_OF_QUESTIONS}
           />
         </View>
-        {allQuestions[currentQuestionIndex].options.length > 0
+        {questions[currentQuestionIndex].options.length > 0
           ? renderOptions(navigation)
           : renderInput(navigation)}
       </View>
