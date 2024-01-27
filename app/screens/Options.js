@@ -68,6 +68,14 @@ const Options = ({ navigation }) => {
         <Text style={styles.btnText}>Security+</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={() => handleQuestionsOptionPress("pentest+")}
+        style={
+          questionsOptions === "pentest+" ? styles.btnSelected : styles.btn
+        }
+      >
+        <Text style={styles.btnText}>Pentest+</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => handleQuestionsOptionPress("ports")}
         style={questionsOptions === "ports" ? styles.btnSelected : styles.btn}
       >

@@ -9,24 +9,34 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { securityPlusQuestions } from "../../data";
-import { portQuestions } from "../../data";
+import {
+  pentestPlusQuestions,
+  portQuestions,
+  securityPlusQuestions,
+} from "../../data";
 import ProgressBar from "./ProgressBar";
 import Questions from "./Questions";
 import { Colors } from "./Welcome";
 
 const QuizPage = ({ route, navigation }) => {
-  // version 13
+  // version 14
   let questions = [];
   switch (route.params.questionsOptions) {
     case "all":
-      questions = [...securityPlusQuestions, ...portQuestions];
+      questions = [
+        ...securityPlusQuestions,
+        ...portQuestions,
+        ...pentestPlusQuestions,
+      ];
       break;
     case "ports":
       questions = portQuestions;
       break;
     case "security+":
       questions = securityPlusQuestions;
+      break;
+    case "pentest+":
+      questions = pentestPlusQuestions;
       break;
     default:
       questions = securityPlusQuestions;
