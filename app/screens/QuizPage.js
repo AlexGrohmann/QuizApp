@@ -19,7 +19,7 @@ import Questions from "./Questions";
 import { Colors } from "./Welcome";
 
 const QuizPage = ({ route, navigation }) => {
-  // version 14
+  // version 15
   let questions = [];
   switch (route.params.questionsOptions) {
     case "all":
